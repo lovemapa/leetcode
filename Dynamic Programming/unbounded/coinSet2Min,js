@@ -1,0 +1,31 @@
+const arr = [1, 2, 5];
+const sum = 11;
+const arrLength = arr.length;
+
+// Initialize the table with large values
+const t = Array.from({ length: arrLength + 1 }, (e) => new Array(sum + 1).fill(Number.MAX_SAFE_INTEGER - 1));
+
+// Set the first column to 0, as 0 sum requires 0 coins
+for (let i = 0; i < arrLength + 1; i++) {
+    t[i][0] = 0;
+}
+
+// Correct initialization for the first row
+for (let j = 1; j < sum + 1; j++) {
+    t[0][j] = Number.MAX_SAFE_INTEGER - 1;
+}
+
+// Fill the table using the coin change logic
+for (let i = 1; i < arrLength + 1; i++) {
+    for (let j = 1; j < sum + 1; j++) {
+        if (arr[i - 1] <= j) {
+            t[i][j] = Math.min(1 + t[i][j - arr[i - 1]], t[i - 1][j]);
+        } else {
+            t[i][j] = t[i - 1][j];
+        }
+    }
+}
+
+let result = t[arrLength][sum];
+result === Number.MAX_SAFE_INTEGER - 1 ? -1 : result
+console.log(result);
