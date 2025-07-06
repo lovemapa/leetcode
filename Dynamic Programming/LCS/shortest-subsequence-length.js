@@ -1,5 +1,5 @@
-const string1 = "abaaa";
-const string2 = "baabaca";
+const string1 = "AGGTAB";
+const string2 = "GXTXAYB";
 
 const strlen1 = string1.length;
 const strlen2 = string2.length;
@@ -34,26 +34,4 @@ function LCSTopDown(string1, string2, strlen1, strlen2, memoizedTopDownArr) {
     return memoizedTopDownArr[strlen1][strlen2]
 }
 
-LCSTopDown(string1,string2,strlen1,strlen2,memoizedTopDownArr)
-
-let i = strlen1;
-let j = strlen2;
-let str = '';
-
-while (i > 0 && j > 0) {
-    if (string1[i-1] == string2[j-1]) {
-        str = str + string1[i-1];
-        i--;
-        j--;
-    }
-    else {
-        if (memoizedTopDownArr[i - 1][j] >= memoizedTopDownArr[i][j - 1]) {
-            i--;
-        } 
-        else {
-            j--;
-        }
-    }
-}
-console.log(str.split('').reverse().join(''));
-
+console.log(strlen1+strlen2-LCSTopDown(string1,string2,strlen1,strlen2,memoizedTopDownArr));
