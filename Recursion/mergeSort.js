@@ -7,10 +7,9 @@ function mergeSort(low, high, list) {
     if (low < high) {
 
         let mid = parseInt((high - low) / 2 + low);
-
-        mergeSort(low, mid, list.slice(low, mid + 1));
-        mergeSort(mid + 1, high, list.slice(mid + 1));
-        merge(list.slice(low, mid + 1), list.slice(mid + 1))
+        mergeSort(low, mid, list);
+        mergeSort(mid + 1, high, list);
+        merge(low, mid, high,list)
 
     }
 
@@ -18,34 +17,35 @@ function mergeSort(low, high, list) {
 }
 
 
-function merge(listA, listB) {
+function merge(low,mid,high,list) {
 
-    let listC = new Array(listA.length + listB.length);
+    let listA= list.slice(low,mid+1);
+    let listB= list.slice(mid+1,high+1);
 
-    let i = 0, j = 0, k = 0;
+    let i = 0, j = 0, k = low;
     while (i < listA.length && j < listB.length) {
 
 
         if (listA[i] < listB[j]) {
-            listC[k] = listA[i];
+            list[k] = listA[i];
             i++;
             k++;
         }
         else {
-            listC[k] = listB[j];
+            list[k] = listB[j];
             j++;
             k++;
         }
     }
 
     while (i < listA.length) {
-        listC[k] = listA[i];
+        list[k] = listA[i];
         i++;
         k++;
     }
 
     while (j < listB.length) {
-        listC[k] = listB[j];
+        list[k] = listB[j];
         j++;
         k++;
     }
